@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Daily Loot — Earn Rewards</title>
+<style>
+:root{--bg:#0b1020;--panel:#151d32;--muted:#aab4ca;--gold:#ffd34e;--green:#20c477;--line:#293550}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#111b34,#090d18 65%);color:#f7f8fc;font:16px system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+.wrap{max-width:1020px;margin:auto;padding:22px 16px 50px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-weight:900;font-size:23px;letter-spacing:.5px}.brand span{color:var(--gold)}.pill{border:1px solid #3b4967;color:#cbd5e8;border-radius:99px;padding:7px 12px;font-size:12px}
+.hero{margin:24px 0 18px;padding:30px 22px;border:1px solid #3a4560;border-radius:24px;background:radial-gradient(circle at 85% 15%,#3d3260 0,transparent 35%),linear-gradient(135deg,#1c2947,#11182a);text-align:center}
+.crown{font-size:34px}.hero h1{font-size:clamp(32px,7vw,54px);margin:5px 0;color:var(--gold);letter-spacing:1px}.hero p{color:#d0d7e6;margin:8px 0 18px}.bonus{font-size:42px;font-weight:900;margin:8px 0;color:#fff}.bonus small{font-size:16px;color:var(--muted);font-weight:500}
+button{border:0;border-radius:13px;padding:13px 18px;font-weight:800;font-size:15px;cursor:pointer}.primary{background:var(--green);color:#062516}.gold{background:var(--gold);color:#241b00}.ghost{background:#25314b;color:#fff;border:1px solid #3a4968}.hero button{width:min(100%,310px)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0}.card{background:rgba(21,29,50,.94);border:1px solid var(--line);border-radius:18px;padding:18px}.stat small,.muted{color:var(--muted)}.stat strong{display:block;font-size:25px;margin-top:5px}.section{margin-top:20px}.section h2{font-size:19px;margin:0 0 12px}.row{display:flex;align-items:center;justify-content:space-between;gap:12px}.task{display:flex;align-items:center;gap:12px}.ico{width:42px;height:42px;border-radius:13px;background:#25334d;display:grid;place-items:center;font-size:21px;flex:none}.task b{display:block}.task small{color:var(--muted)}.task button{padding:10px 13px}.wallet{display:grid;grid-template-columns:1.2fr 1fr;gap:14px}.field{width:100%;padding:13px;border-radius:12px;border:1px solid #3b4967;background:#0d1425;color:#fff;margin:8px 0 12px;font-size:15px}.note{font-size:12px;color:var(--muted);line-height:1.5}.toast{display:none;margin:14px 0;padding:12px;border-radius:12px;background:#193d32;color:#baf5d8}.footer{text-align:center;color:#8793ab;font-size:12px;margin-top:24px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.wallet{grid-template-columns:1fr}.hero{padding:25px 16px}.top{align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><div class="brand">👑 DAILY <span>LOOT</span></div><div class="pill">REWARDS DEMO</div></header>
+  <section class="hero">
+    <div class="crown">🎁</div><h1>DAILY LOOT</h1>
+    <p>Connect • Complete tasks • Earn rewards</p>
+    <div class="bonus">₹50 <small>Welcome reward*</small></div>
+    <button class="primary" onclick="connectDemo()">🟢 WhatsApp Connect</button>
+    <p class="note">*Demo preview: reward is simulated and has no cash value.</p>
+  </section>
+  <div id="toast" class="toast" role="status"></div>
+  <section class="grid">
+    <div class="card stat"><small>Wallet balance</small><strong id="balance">₹0</strong></div>
+    <div class="card stat"><small>Rewards earned</small><strong id="earned">₹0</strong></div>
+    <div class="card stat"><small>Completed tasks</small><strong id="tasks">0</strong></div>
+  </section>
+  <section class="section card">
+    <div class="row"><h2>🎯 Daily Loot Tasks</h2><span class="pill">Demo tasks</span></div>
+    <div class="row" style="margin:16px 0">
+      <div class="task"><div class="ico">📅</div><div><b>Daily check-in</b><small>Demo reward ₹5</small></div></div>
+      <button class="gold" onclick="claimDaily()">Claim</button>
+    </div>
+    <div style="height:1px;background:var(--line)"></div>
+    <div class="row" style="margin:16px 0 0">
+      <div class="task"><div class="ico">👥</div><div><b>Refer & Earn</b><small>Share your invite (demo) · ₹10</small></div></div>
+      <button class="ghost" onclick="refer()">Share</button>
+    </div>
+  </section>
+  <section class="section wallet">
+    <div class="card">
+      <h2>💳 UPI Withdrawal</h2>
+      <label for="upi" class="muted">UPI ID</label>
+      <input id="upi" class="field" placeholder="name@bank" autocomplete="off">
+      <label for="amount" class="muted">Amount (₹)</label>
+      <input id="amount" class="field" type="number" min="1" placeholder="Enter amount">
+      <button class="primary" style="width:100%" onclick="withdraw()">Request withdrawal</button>
+      <p class="note">Demo only: this form does not send money or store your UPI ID.</p>
+    </div>
+    <div class="card">
+      <h2>🔒 Account & Safety</h2>
+      <p class="muted">A real service should use secure sign-in, clear reward rules, verified payments and customer support.</p>
+      <p class="note">Never share your WhatsApp OTP, PIN, password or UPI PIN. WhatsApp linking must use an official, consent-based flow. A website cannot pay real rewards until a legitimate funding and payout system is configured.</p>
+    </div>
+  </section>
+  <div class="footer">Daily Loot demo • No real account connection, rewards or payments are made.</div>
+</div>
+<script>
+let balance=0,earned=0,tasks=0,claimed=false;
+function notify(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';}
+function render(){document.getElementById('balance').textContent='₹'+balance;document.getElementById('earned').textContent='₹'+earned;document.getElementById('tasks').textContent=tasks;}
+function connectDemo(){notify('Demo mode: WhatsApp account connect nahi hua. Real connection ke liye official WhatsApp Business flow aur user consent zaroori hai.');}
+function claimDaily(){if(claimed){notify('Aaj ka demo check-in pehle hi claim ho chuka hai.');return;}claimed=true;balance+=5;earned+=5;tasks++;render();notify('Demo reward ₹5 wallet mein add hua. Yeh real cash nahi hai.');}
+function refer(){if(navigator.share){navigator.share({title:'Daily Loot',text:'Daily Loot demo dekho!' }).catch(()=>{});}else{notify('Share feature aapke browser mein available nahi hai.');}}
+function withdraw(){const upi=document.getElementById('upi').value.trim();const amount=Number(document.getElementById('amount').value);if(!/^[\w.-]+@[\w.-]+$/.test(upi)){notify('Demo ke liye valid-format UPI ID likhein (jaise name@bank).');return;}if(!Number.isFinite(amount)||amount<=0){notify('Withdrawal amount enter karein.');return;}if(amount>balance){notify('Demo wallet balance se zyada withdrawal request nahi kar sakte.');return;}notify('Demo request only: koi payment initiate nahi hui aur UPI ID save nahi ki gayi.');}
+</script>
+</body></html>
